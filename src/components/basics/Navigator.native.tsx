@@ -1,12 +1,12 @@
 import { Navigator } from 'react-native';
-import Base from './Navigator';
+import Common from './Navigator.common';
 import * as React from 'react';
 
-class NavigatorWrapper extends React.Component<Base.Props, void> {
+class NavigatorWrapper extends React.Component<Common.Props, void> {
     render(): JSX.Element {
         return <Navigator
-            renderScene={(pathQuery: Base.PathQuery, navigator: Navigator) =>
-              Base.createElement(this.props.pathQuery, this.props.router)(navigator)
+            renderScene={(pathQuery: Common.PathQuery, navigator: Navigator) =>
+              Common.createElement(this.props.pathQuery, this.props.router)(navigator)
             }
         />;
     }
