@@ -3,26 +3,20 @@ import * as React from 'react';
 class Navigator extends React.Component<Navigator.Props, Navigator.State> implements Navigator.Push {
     constructor(props: Navigator.Props) {
         super(props);
-        this.state = {currentComponent: this.createElement(this.props.initialElement)};
+        this.state = {currentComponent: Navigator.createElement(props.pathQuery, props.router)(this)};
         if (typeof window === 'undefined') {
             return;
         }
-        window.onpopstate = event => {
-            this.setState({currentComponent: this.createElement(event.state
-                ? Navigator.createElement(event.state, this.props.router)
-                : this.props.initialElement
-            )});
-        };
+        window.onpopstate = event =>
+            this.setState({currentComponent: Navigator.createElement(event.state || props.pathQuery, props.router)(this)})
+        ;
     }
     push(pathQuery: Navigator.PathQuery): void {
         history.pushState(pathQuery, '', pathQuery.path + toQueryString(pathQuery.query));
-        this.setState({currentComponent: this.createElement(Navigator.createElement(pathQuery, this.props.router))});
+        this.setState({currentComponent: Navigator.createElement(pathQuery, this.props.router)(this)});
     }
     render(): JSX.Element {
         return this.state.currentComponent;
-    }
-    private createElement(elementFunction: Navigator.ElementFunction): JSX.Element {
-        return elementFunction ? elementFunction(this) : null;
     }
 }
 
@@ -38,8 +32,8 @@ function toQueryString(query?: {[key: string]: string}): string {
 
 namespace Navigator {
     export interface Props {
+        pathQuery: PathQuery;
         router: Router;
-        initialElement: ElementFunction;
     }
     export interface State {
         currentComponent: JSX.Element;
@@ -56,12 +50,15 @@ namespace Navigator {
     }
     export type ElementFunction = (navigator: Push) => JSX.Element;
 
-    export type RouteFunction = ((params: Params, navigator: Push) => JSX.Element);
+    export type RouteFunction = (params: Params, navigator: Push) => JSX.Element;
 
-    export type Router = {[path: string]: RouteFunction | Router};
+    export interface Router {
+        [path: string]: RouteFunction | Router;
+        _notFound?: RouteFunction;
+    }
 
     export function createElement(pathQuery: PathQuery, router: Router): ElementFunction {
-        return _createElement(pathQuery, router);
+        return _createElement(pathQuery, router) || (router._notFound ? router._notFound.bind(this, pathQuery) : () => null);
     }
     
     function _createElement(

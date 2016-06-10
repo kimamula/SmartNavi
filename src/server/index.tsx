@@ -11,16 +11,17 @@ const app = express();
 app.use(express.static('public'));
 
 app.use((req, res) => {
+    let status = 200;
     const
         pathQuery = {
             path: req.path,
             query: Object.assign({time: String(Date.now())}, req.query)
         },
-        element = Navigator.createElement(pathQuery, router);
-    res.status(element ? 200 : 404).send(render(
-        <SmartNavi router={router} initialElement={element ? element : () => <NotFound />} />,
-        pathQuery
-    ));
+        response = render(<SmartNavi router={Object.assign({_notFound: () => {
+            status = 404;
+            return <NotFound />;
+        }}, router)} pathQuery={pathQuery} />, pathQuery);
+    res.status(status).send(response);
 });
 
 function render(element: React.ReactElement<any>, pathQuery: Navigator.PathQuery): string {

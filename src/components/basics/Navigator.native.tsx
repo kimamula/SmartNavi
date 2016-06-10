@@ -5,10 +5,9 @@ import * as React from 'react';
 class NavigatorWrapper extends React.Component<Base.Props, void> {
     render(): JSX.Element {
         return <Navigator
-            renderScene={(pathQuery: Base.PathQuery, navigator: Navigator) => (pathQuery
-                ? Base.createElement(pathQuery, this.props.router)
-                : this.props.initialElement
-            )(navigator)}
+            renderScene={(pathQuery: Base.PathQuery, navigator: Navigator) =>
+              Base.createElement(this.props.pathQuery, this.props.router)(navigator)
+            }
         />;
     }
 }
