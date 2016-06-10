@@ -8,7 +8,6 @@ class Navigator extends React.Component<Navigator.Props, Navigator.State> implem
             return;
         }
         window.onpopstate = event => {
-            console.log(event.state);
             this.setState({currentComponent: this.createElement(event.state
                 ? Navigator.createElement(event.state, this.props.router)
                 : this.props.initialElement
