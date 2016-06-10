@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "jsx": "preserve",
+        "noImplicitAny": true,
+        "preserveConstEnums": true,
+        "rootDir": "src",
+        "suppressImplicitAnyIndexErrors": true,
+        "noEmitOnError": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
