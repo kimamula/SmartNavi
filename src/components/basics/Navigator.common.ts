@@ -25,14 +25,16 @@ namespace Navigator {
     }
 
     export function createElement(pathQuery: PathQuery, router: Router): ElementFunction {
-        return _createElement(pathQuery, router) || (router._notFound ? router._notFound.bind(this, pathQuery) : () => null);
+        let { path, query } = pathQuery;
+        path = path.startsWith('/') ? path.substr(1) : path;
+        return _createElement({ path, query }, router) || (router._notFound ? router._notFound.bind(this, pathQuery) : () => null);
     }
     
     function _createElement(
         params: Params,
         router: RouteFunction | Router
     ): (navigator: Push) => JSX.Element {
-        if (!params.path || params.path === '/') {
+        if (!params.path) {
             return typeof router === 'function'
                 ? (router as any).bind(this, params)
                 : typeof router[''] === 'function'
