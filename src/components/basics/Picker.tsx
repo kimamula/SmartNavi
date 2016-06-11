@@ -14,7 +14,7 @@ class Picker extends React.Component<PickerProperties, void> {
 namespace Picker {
     export class Item extends React.Component<PickerItemProperties, void> {
         render(): JSX.Element {
-            return <option value={this.props.value}>{this.props.label ? this.props.label : this.props.value }</option>;
+            return <option value={this.props.value}>{this.props.label}</option>;
         }
     }
 }

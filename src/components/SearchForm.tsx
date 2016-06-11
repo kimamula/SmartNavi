@@ -29,10 +29,12 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
                 <View style={styles.row}>
                     <Picker style={styles.label} selectedValue={SearchForm.When[when]}
                             onValueChange={when => this.setState({ from, to, when: SearchForm.When[when], time })} >
-                        <Picker.Item value={SearchForm.When[SearchForm.When.Depart]} />
-                        <Picker.Item value={SearchForm.When[SearchForm.When.Arrive]} />
+                        <Picker.Item value={SearchForm.When[SearchForm.When.Depart]} label={SearchForm.When[SearchForm.When.Depart]}/>
+                        <Picker.Item value={SearchForm.When[SearchForm.When.Arrive]} label={SearchForm.When[SearchForm.When.Arrive]} />
                     </Picker>
                     <Text style={styles.label}>at</Text>
+                </View>
+                <View style={styles.row}>
                     <DatePicker date={time} mode='datetime'
                                 onDateChange={time => this.setState({ from, to, when, time })} />
                 </View>
@@ -78,8 +80,6 @@ namespace SearchForm {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#F5FCFF',
         fontSize: 20
     },

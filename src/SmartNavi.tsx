@@ -15,6 +15,7 @@ class SmartNavi extends React.Component<Navigator.Props, void> {
 
 const styles = StyleSheet.create({
     container: {
+        justifyContent: 'center',
         backgroundColor: '#e9eaed',
         flex: 1,
     }
