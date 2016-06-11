@@ -5,7 +5,7 @@ import * as React from 'react';
 
 const router = {
     '': (params: Navigator.Params, navigator: Navigator.Push) => {
-        const { origin, destination, when, time } = params.query;
+        const { origin, destination, when, time } = params.query || {} as any;
         return <SearchForm navigator={navigator} initialState={{
             origin,
             destination,
@@ -14,7 +14,7 @@ const router = {
         }}/>
     },
     directions: (params: Navigator.Params, navigator: Navigator.Push) => {
-        const { origin, destination, when, time } = params.query;
+        const { origin, destination, when, time } = params.query || {} as any;
         return <Direction
             navigator={navigator}
             origin={origin}
