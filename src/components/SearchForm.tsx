@@ -13,28 +13,28 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
         this.state = props.initialState;
     }
     render(): JSX.Element {
-        const { origin, destination, when, time } = this.state;
+        const { from, to, when, time } = this.state;
         return (
             <View style={styles.container}>
                 <View style={styles.row}>
-                    <Text style={styles.label}>Origin</Text>
-                    <TextInput style={styles.input} defaultValue={origin}
-                               onChangeText={origin => this.setState({ origin, destination, when, time })} />
+                    <Text style={styles.label}>From</Text>
+                    <TextInput style={styles.input} defaultValue={from}
+                               onChangeText={from => this.setState({ from, to, when, time })} />
                 </View>
                 <View style={styles.row}>
-                    <Text style={styles.label}>Destination</Text>
-                    <TextInput style={styles.input} defaultValue={destination}
-                               onChangeText={destination => this.setState({ origin, destination, when, time })} />
+                    <Text style={styles.label}>To</Text>
+                    <TextInput style={styles.input} defaultValue={to}
+                               onChangeText={to => this.setState({ from, to, when, time })} />
                 </View>
                 <View style={styles.row}>
                     <Picker style={styles.label} selectedValue={SearchForm.When[when]}
-                            onValueChange={when => this.setState({ origin, destination, when: SearchForm.When[when], time })} >
+                            onValueChange={when => this.setState({ from, to, when: SearchForm.When[when], time })} >
                         <Picker.Item value={SearchForm.When[SearchForm.When.Depart]} />
                         <Picker.Item value={SearchForm.When[SearchForm.When.Arrive]} />
                     </Picker>
                     <Text style={styles.label}>at</Text>
                     <DatePicker date={time} mode='datetime'
-                                onDateChange={time => this.setState({ origin, destination, when, time })} />
+                                onDateChange={time => this.setState({ from, to, when, time })} />
                 </View>
                 <Text onPress={() => this.onPressSearch()}>Search</Text>
             </View>
@@ -42,14 +42,14 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
     }
 
     private onPressSearch(): void {
-        if (!this.state.origin || !this.state.destination) {
+        if (!this.state.from || !this.state.to) {
             return alert('Please fill the form');
         }
         this.props.navigator.push({
             path: 'directions',
             query: {
-                origin: this.state.origin,
-                destination: this.state.destination,
+                from: this.state.from,
+                to: this.state.to,
                 when: String(this.state.when),
                 time: String(this.state.time.getTime())
             }
@@ -64,8 +64,8 @@ namespace SearchForm {
     }
 
     export interface State {
-        origin?: string;
-        destination?: string;
+        from?: string;
+        to?: string;
         when: When;
         time: Date;
     }

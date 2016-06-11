@@ -5,20 +5,20 @@ import * as React from 'react';
 
 const router = {
     '': (params: Navigator.Params, navigator: Navigator.Push) => {
-        const { origin, destination, when, time } = params.query || {} as any;
+        const { from, to, when, time } = params.query || {} as any;
         return <SearchForm navigator={navigator} initialState={{
-            origin,
-            destination,
+            from,
+            to,
             when: when ? Number(when) : SearchForm.When.Depart,
             time: time ? new Date(Number(time)) : new Date()
         }}/>
     },
     directions: (params: Navigator.Params, navigator: Navigator.Push) => {
-        const { origin, destination, when, time } = params.query || {} as any;
+        const { from, to, when, time } = params.query || {} as any;
         return <Direction
             navigator={navigator}
-            origin={origin}
-            destination={destination}
+            from={from}
+            to={to}
             when={Number(when)}
             time={new Date(Number(time))}
         />;

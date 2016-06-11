@@ -11,8 +11,8 @@ class Direction extends React.Component<Direction.Props, void> {
 
 namespace Direction {
     export interface Props {
-        origin: string;
-        destination: string;
+        from: string;
+        to: string;
         when: SearchForm.When;
         time: Date;
         navigator: Navigator.Push;
