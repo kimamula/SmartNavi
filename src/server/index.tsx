@@ -31,6 +31,27 @@ function render(element: React.ReactElement<any>, pathQuery: Navigator.PathQuery
             <head>
                 <meta charSet="UTF-8" />
                 <title>smart-navi</title>
+                <style type="text/css">{`
+                    @-webkit-keyframes rotate {
+                        0% {
+                            -webkit-transform: rotate(0);
+                        }
+                        100% {
+                            -webkit-transform: rotate(360deg);
+                        }
+                    }
+                    @-webkit-keyframes fade {
+                        0% {
+                            opacity: 1;
+                        }
+                        50% {
+                            opacity: .2;
+                        }
+                        100% {
+                          opacity: 1;
+                        }
+                    }
+                `}</style>
             </head>
             <body>
                 <div id="smart-navi"
