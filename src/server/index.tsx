@@ -19,7 +19,8 @@ app.get('/api/directions', (req, res) =>
             origin: req.query.from,
             destination: req.query.to,
             mode: 'transit',
-            [req.query.when === Direction.When.Arrive ? 'arrival_time' : 'departure_time']: Math.floor(req.query.time / 1000)
+            [req.query.when === Direction.When.Arrive ? 'arrival_time' : 'departure_time']: Math.floor(req.query.time / 1000),
+            language: 'ja'
         })}`
     )
         .then(response => response.json()
