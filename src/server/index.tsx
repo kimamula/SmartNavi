@@ -5,10 +5,39 @@ import * as React from 'react';
 import Navigator from '../components/basics/Navigator';
 import NotFound from '../components/NotFound';
 import router from '../router';
+import 'isomorphic-fetch';
 
 const app = express();
 
 app.use(express.static('public'));
+
+app.get('/api/directions', (req, res) =>
+    fetch(
+        `https://maps.googleapis.com/maps/api/directions/json${toQueryString({
+            origin: req.query.from,
+            destination: req.query.to,
+            key: process.env.DIRECTIONS_API_KEY,
+            mode: 'transit',
+            [req.query.when === 'Arrive' ? 'arrival_time' : 'departure_time']: Math.floor(req.query.time / 1000)
+        })}`,
+        {
+            method: 'GET'
+        }
+    )
+        .then(response => response.json()
+            .then(json => res.status(response.status).json(json))
+        )
+);
+
+function toQueryString(query?: {[key: string]: string}): string {
+    if (!query) {
+        return '';
+    }
+    return Object.keys(query).reduce((acc, key, index) => {
+        const sep = index ? '&' : '?';
+        return `${acc}${sep}${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
+    }, '')
+}
 
 app.use((req, res) => {
     let status = 200;

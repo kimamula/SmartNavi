@@ -15,6 +15,7 @@
     "dtsm": "^1.1.0",
     "express": "^4.13.4",
     "glob": "^7.0.3",
+    "isomorphic-fetch": "^2.2.1",
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-native": "^0.26.3",
