@@ -1,21 +1,35 @@
 import * as React from 'react';
-import SearchForm from './SearchForm';
-import Navigator from './basics/Navigator';
+import DirectionsAPI from './DirectionsAPI';
 import Progress from './basics/Progress';
+import View from './basics/View';
 
-class Direction extends React.Component<Direction.Props, void> {
+class Direction extends React.Component<Direction.Props, Direction.State> {
+    constructor(props: Direction.Props) {
+        super(props);
+        this.state = {};
+    }
     render(): JSX.Element {
-        return <Progress />;
+        if (this.state.route) {
+            return null;
+
+        } else {
+            return <View>
+                <Progress />
+                <DirectionsAPI {...this.props} onSuccess={route => this.onFetchRoute(route)} onError={reason => alert(reason)} />
+            </View>;
+        }
+    }
+
+    private onFetchRoute(route: DirectionsAPI.Route): void {
+        this.setState({route});
     }
 }
 
 namespace Direction {
-    export interface Props {
-        from: string;
-        to: string;
-        when: SearchForm.When;
-        time: Date;
-        navigator: Navigator.Push;
+    export interface Props extends DirectionsAPI.Params {
+    }
+    export interface State {
+        route?: DirectionsAPI.Route;
     }
 }
 

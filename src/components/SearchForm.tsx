@@ -6,6 +6,7 @@ import View from './basics/View';
 import Picker from './basics/Picker';
 import DatePicker from './basics/DatePicker';
 import Navigator from './basics/Navigator';
+import Direction from '../model/Direction';
 
 class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
     constructor(props: SearchForm.Props) {
@@ -27,10 +28,10 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
                                onChangeText={to => this.setState({ from, to, when, time })} />
                 </View>
                 <View style={styles.row}>
-                    <Picker style={styles.label} selectedValue={SearchForm.When[when]}
-                            onValueChange={when => this.setState({ from, to, when: SearchForm.When[when], time })} >
-                        <Picker.Item value={SearchForm.When[SearchForm.When.Depart]} label={SearchForm.When[SearchForm.When.Depart]}/>
-                        <Picker.Item value={SearchForm.When[SearchForm.When.Arrive]} label={SearchForm.When[SearchForm.When.Arrive]} />
+                    <Picker style={styles.label} selectedValue={Direction.When[when]}
+                            onValueChange={when => this.setState({ from, to, when: Direction.When[when], time })} >
+                        <Picker.Item value={Direction.When[Direction.When.Depart]} label={Direction.When[Direction.When.Depart]}/>
+                        <Picker.Item value={Direction.When[Direction.When.Arrive]} label={Direction.When[Direction.When.Arrive]} />
                     </Picker>
                     <Text style={styles.label}>at</Text>
                 </View>
@@ -68,13 +69,8 @@ namespace SearchForm {
     export interface State {
         from?: string;
         to?: string;
-        when: When;
+        when: Direction.When;
         time: Date;
-    }
-
-    export enum When {
-        Depart,
-        Arrive
     }
 }
 

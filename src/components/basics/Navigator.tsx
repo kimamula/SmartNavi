@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Common from './Navigator.common';
+import Utils from '../../Utils';
 
 class Navigator extends React.Component<Navigator.Props, Navigator.State> implements Navigator.Push {
     constructor(props: Navigator.Props) {
@@ -13,22 +14,12 @@ class Navigator extends React.Component<Navigator.Props, Navigator.State> implem
         ;
     }
     push(pathQuery: Navigator.PathQuery): void {
-        history.pushState(pathQuery, '', pathQuery.path + toQueryString(pathQuery.query));
+        history.pushState(pathQuery, '', pathQuery.path + Utils.toQueryString(pathQuery.query));
         this.setState({currentComponent: Navigator.createElement(pathQuery, this.props.router)(this)});
     }
     render(): JSX.Element {
         return this.state.currentComponent;
     }
-}
-
-function toQueryString(query?: {[key: string]: string}): string {
-    if (!query) {
-        return '';
-    }
-    return Object.keys(query).reduce((acc, key, index) => {
-        const sep = index ? '&' : '?';
-        return `${acc}${sep}${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`
-    }, '')
 }
 
 namespace Navigator {
