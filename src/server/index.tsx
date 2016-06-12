@@ -48,6 +48,7 @@ function render(element: React.ReactElement<any>, pathQuery: Navigator.PathQuery
             <head>
                 <meta charSet="UTF-8" />
                 <title>smart-navi</title>
+                <meta name='viewport' content='width=device-width, initial-scale=0.5, minimum-scale=1.0, maximum-scale=4.0' />
                 <style type="text/css">{`
                     @-webkit-keyframes rotate {
                         0% {
@@ -70,7 +71,7 @@ function render(element: React.ReactElement<any>, pathQuery: Navigator.PathQuery
                     }
                 `}</style>
             </head>
-            <body>
+            <body style={{margin: 0}}>
                 <div id="smart-navi"
                      data-path-query={JSON.stringify(pathQuery || {})}
                      dangerouslySetInnerHTML={{__html: renderToString(element)}}
