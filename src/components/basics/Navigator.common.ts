@@ -2,7 +2,7 @@ import * as React from 'react';
 
 namespace Navigator {
     export interface Props {
-        pathQuery: PathQuery;
+        initialPathQuery: PathQuery;
         router: Router;
     }
     export interface PathQuery {

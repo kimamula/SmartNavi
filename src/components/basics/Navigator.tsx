@@ -5,12 +5,12 @@ import Utils from '../../Utils';
 class Navigator extends React.Component<Navigator.Props, Navigator.State> implements Navigator.Push {
     constructor(props: Navigator.Props) {
         super(props);
-        this.state = {currentComponent: Navigator.createElement(props.pathQuery, props.router)(this)};
+        this.state = {currentComponent: Navigator.createElement(props.initialPathQuery, props.router)(this)};
         if (typeof window === 'undefined') {
             return;
         }
         window.onpopstate = event =>
-            this.setState({currentComponent: Navigator.createElement(event.state || props.pathQuery, props.router)(this)})
+            this.setState({currentComponent: Navigator.createElement(event.state || props.initialPathQuery, props.router)(this)})
         ;
     }
     push(pathQuery: Navigator.PathQuery): void {

@@ -5,8 +5,9 @@ import * as React from 'react';
 class NavigatorWrapper extends React.Component<Common.Props, void> {
     render(): JSX.Element {
         return <Navigator
+            initialRoute={this.props.initialPathQuery}
             renderScene={(pathQuery: Common.PathQuery, navigator: Navigator) =>
-              Common.createElement(this.props.pathQuery, this.props.router)(navigator)
+              Common.createElement(pathQuery, this.props.router)(navigator)
             }
         />;
     }
