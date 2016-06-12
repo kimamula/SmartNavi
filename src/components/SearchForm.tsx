@@ -27,19 +27,18 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
                     <TextInput style={styles.input} defaultValue={to}
                                onChangeText={to => this.setState({ from, to, when, time })} />
                 </View>
-                <View style={styles.row}>
-                    <Picker style={styles.label} selectedValue={Direction.When[when]}
+                <View style={styles.datePickerRow}>
+                    <Picker style={styles.picker} selectedValue={Direction.When[when]}
                             onValueChange={when => this.setState({ from, to, when: Direction.When[when], time })} >
                         <Picker.Item value={Direction.When[Direction.When.Depart]} label={Direction.When[Direction.When.Depart]}/>
                         <Picker.Item value={Direction.When[Direction.When.Arrive]} label={Direction.When[Direction.When.Arrive]} />
                     </Picker>
-                    <Text style={styles.label}>at</Text>
-                </View>
-                <View style={styles.row}>
-                    <DatePicker date={time} mode='datetime'
+                    <DatePicker date={time} mode='datetime' style={styles.datePicker}
                                 onDateChange={time => this.setState({ from, to, when, time })} />
                 </View>
-                <Text onPress={() => this.onPressSearch()}>Search</Text>
+                <View style={styles.buttonRow}>
+                    <Text style={styles.button} onPress={() => this.onPressSearch()}>Search</Text>
+                </View>
             </View>
         );
     }
@@ -76,19 +75,47 @@ namespace SearchForm {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#F5FCFF',
-        fontSize: 20
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: '#F5FCFF'
     },
     row: {
         display: 'flex',
+        height: 30,
+        alignItems: 'center',
         flexDirection: 'row'
+    },
+    datePickerRow: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    buttonRow: {
+        display: 'flex',
+        height: 30,
+        alignItems: 'center',
+        flexDirection: 'row',
+        justifyContent: 'center'
     },
     label: {
         flex: 1,
         fontSize: 20
     },
     input: {
-        flex: 2
+        flex: 4,
+        backgroundColor: '#FFFFFF'
+    },
+    picker: {
+        flex: 1,
+        fontSize: 20
+    },
+    datePicker: {
+        flex: 4
+    },
+    button: {
+        fontSize: 20,
+        color: '#FFFFFF',
+        backgroundColor: '#60b044'
     }
 });
 

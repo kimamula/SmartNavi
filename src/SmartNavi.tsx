@@ -7,7 +7,7 @@ import Text from './components/basics/Text';
 class SmartNavi extends React.Component<Navigator.Props, void> {
     render(): JSX.Element {
         return <View style={styles.container}>
-            <Text>SmartNavi</Text>
+            <Text style={styles.title}>SmartNavi</Text>
             <Navigator {...this.props} />
         </View>;
     }
@@ -17,7 +17,12 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         backgroundColor: '#e9eaed',
-        flex: 1,
+        flex: 1
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 10
     }
 });
 

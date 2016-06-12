@@ -9,6 +9,7 @@ class DatePicker extends React.Component<DatePickerIOSProperties, void> {
             value={ISODateString(this.props.date)}
             min={ISODateString(this.props.minimumDate)}
             max={ISODateString(this.props.maximumDate)}
+            style={this.props.style}
             onChange={event =>
                 this.props.onDateChange && this.props.onDateChange(new Date(Date.parse((event.currentTarget as HTMLInputElement).value)))
             }
