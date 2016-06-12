@@ -3,9 +3,9 @@ import { TextProperties } from 'react-native';
 
 class Text extends React.Component<TextProperties, void> {
     render(): JSX.Element {
-        return <span style={this.props.style}
+        return <p style={this.props.style}
                   onClick={() => this.props.onPress && this.props.onPress()}
-        >{this.props.children}</span>;
+        >{this.props.children}</p>;
     }
 }
 

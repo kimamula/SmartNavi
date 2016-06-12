@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ProgressViewIOS } from 'react-native';
 
 class Progress extends React.Component<void, Progress.State> {
+    private timer: any;
     constructor() {
         super();
         this.state = { progress: 0 };
@@ -9,12 +10,15 @@ class Progress extends React.Component<void, Progress.State> {
     componentDidMount(): void {
         this.updateProgress();
     }
+    componentWillUnmount(): void {
+        clearInterval(this.timer);
+    }
     render(): JSX.Element {
         return <ProgressViewIOS progress={this.getProgress()} />;
     }
 
     private updateProgress(): void {
-        setInterval(() => {
+        this.timer = setInterval(() => {
             this.setState({ progress: this.state.progress + 0.01 })
         }, 50);
     }

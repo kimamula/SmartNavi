@@ -8,5 +8,5 @@ class SmartNaviNative extends React.Component {
         return <SmartNavi router={router} initialPathQuery={{ path: '' }} />;
     }
 }
-
+console.ignoredYellowBox = ['Warning: Failed propType'];
 AppRegistry.registerComponent('SmartNavi', () => SmartNaviNative);

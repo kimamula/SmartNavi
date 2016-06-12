@@ -106,8 +106,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     picker: {
-        flex: 1,
-        fontSize: 20
+        flex: 1
     },
     datePicker: {
         flex: 4
