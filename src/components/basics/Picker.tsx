@@ -5,7 +5,7 @@ class Picker extends React.Component<PickerProperties, void> {
     render(): JSX.Element {
         return <select
             style={this.props.style}
-            value={this.props.selectedValue}
+            defaultValue={this.props.selectedValue}
             onChange={event => this.props.onValueChange && this.props.onValueChange((event.currentTarget as HTMLSelectElement).value)}
         >{this.props.children}</select>;
     }
