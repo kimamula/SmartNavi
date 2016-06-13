@@ -40,7 +40,8 @@ android/app/libs
 android/keystores/debug.keystore
 
 # TypeScript
-typings
+typings/*
+!typings/react-native
 src/**/*.js
 
 # built js
