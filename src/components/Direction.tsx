@@ -4,6 +4,8 @@ import Progress from './basics/Progress';
 import View from './basics/View';
 import Text from './basics/Text';
 import ListView from './basics/ListView';
+import StyleSheet from './basics/StyleSheet';
+import Navigator from './basics/Navigator';
 
 type LegListView = new () => ListView<DirectionsAPI.Leg>;
 type StepListView = new () => ListView<DirectionsAPI.Step>;
@@ -18,25 +20,27 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
     render(): JSX.Element {
         if (this.state.route) {
             const { summary, legs } = this.state.route;
-            return <View>
-                <Text>{summary}</Text>
-                <LegListView
-                    dataSource={legs}
-                    renderRow={leg => <View>
-                        <Text>From: {leg.start_address}</Text>
-                        {leg.departure_time ? <Text>Depart at {leg.departure_time.text}</Text> : null}
-                        <Text>To: {leg.end_address}</Text>
-                        {leg.arrival_time ? <Text>Arrive at {leg.arrival_time.text}</Text> : null}
-                        <Text>Distance: {leg.distance.text}</Text>
-                        <Text>Duration: {leg.duration.text}</Text>
-                        <StepListView
-                            dataSource={leg.steps}
-                            renderRow={step => this.renderStep(step)}
-                        />
-                    </View>}
-                />
+            return <View style={styles.root}>
+                <Text style={styles.title} onPress={() => this.props.navigator.pop()}>{'< Back to the form'}</Text>
+                <View style={styles.container}>
+                    <Text>{summary}</Text>
+                    <LegListView
+                        dataSource={legs}
+                        renderRow={leg => <View>
+                            <Text>From: {leg.start_address}</Text>
+                            {leg.departure_time ? <Text>Depart at {leg.departure_time.text}</Text> : null}
+                            <Text>To: {leg.end_address}</Text>
+                            {leg.arrival_time ? <Text>Arrive at {leg.arrival_time.text}</Text> : null}
+                            <Text>Distance: {leg.distance.text}</Text>
+                            <Text>Duration: {leg.duration.text}</Text>
+                            <StepListView
+                                dataSource={leg.steps}
+                                renderRow={step => this.renderStep(step)}
+                            />
+                        </View>}
+                    />
+                </View>
             </View>;
-
         } else {
             return <View>
                 <Progress />
@@ -66,10 +70,26 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
 
 namespace Direction {
     export interface Props extends DirectionsAPI.Params {
+        navigator: Navigator.NavigatorElement;
     }
     export interface State {
         route?: DirectionsAPI.Route;
     }
 }
+
+const styles = StyleSheet.create({
+    root: {
+        backgroundColor: '#e9eaed',
+        flex: 1
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 10
+    },
+    container: {
+        backgroundColor: '#F5FCFF'
+    }
+});
 
 export default Direction;

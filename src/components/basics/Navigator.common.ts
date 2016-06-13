@@ -12,12 +12,13 @@ namespace Navigator {
     export interface Params extends PathQuery {
         pathParams?: {[key: string]: string};
     }
-    export interface Push {
+    export interface NavigatorElement {
         push: (pathQuery: PathQuery) => void;
+        pop: () => void;
     }
-    export type ElementFunction = (navigator: Push) => JSX.Element;
+    export type ElementFunction = (navigator: NavigatorElement) => JSX.Element;
 
-    export type RouteFunction = (params: Params, navigator: Push) => JSX.Element;
+    export type RouteFunction = (params: Params, navigator: NavigatorElement) => JSX.Element;
 
     export interface Router {
         [path: string]: RouteFunction | Router;
@@ -33,7 +34,7 @@ namespace Navigator {
     function _createElement(
         params: Params,
         router: RouteFunction | Router
-    ): (navigator: Push) => JSX.Element {
+    ): (navigator: NavigatorElement) => JSX.Element {
         if (!params.path) {
             return typeof router === 'function'
                 ? (router as any).bind(this, params)
@@ -44,7 +45,7 @@ namespace Navigator {
         const paths = params.path.split('/'),
             firstPath = paths.shift(),
             nextPath = paths.join('/');
-        let result: (navigator: Push) => JSX.Element = null;
+        let result: (navigator: NavigatorElement) => JSX.Element = null;
         if (router[firstPath]) {
             result = _createElement(
                 Object.assign({}, params, {path: nextPath}),

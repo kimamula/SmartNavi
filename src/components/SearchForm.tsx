@@ -15,7 +15,8 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
     }
     render(): JSX.Element {
         const { from, to, when, time } = this.state;
-        return (
+        return <View style={styles.root}>
+            <Text style={styles.title}>Search Form</Text>
             <View style={styles.container}>
                 <View style={styles.row}>
                     <Text style={styles.label}>From</Text>
@@ -40,7 +41,7 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
                     <Text style={styles.button} onPress={() => this.onPressSearch()}>Search</Text>
                 </View>
             </View>
-        );
+        </View>;
     }
 
     private onPressSearch(): void {
@@ -62,7 +63,7 @@ class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
 namespace SearchForm {
     export interface Props {
         initialState: State;
-        navigator: Navigator.Push;
+        navigator: Navigator.NavigatorElement;
     }
 
     export interface State {
@@ -74,6 +75,15 @@ namespace SearchForm {
 }
 
 const styles = StyleSheet.create({
+    root: {
+        backgroundColor: '#e9eaed',
+        flex: 1
+    },
+    title: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 10
+    },
     container: {
         display: 'flex',
         flexDirection: 'column',
@@ -106,6 +116,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF'
     },
     picker: {
+        fontSize: 20,
         flex: 1
     },
     datePicker: {
