@@ -18,15 +18,14 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
         this.state = {};
     }
     render(): JSX.Element {
+        let contents: JSX.Element;
         if (this.state.route) {
             const { summary, legs } = this.state.route;
-            return <View style={styles.root}>
-                <Text style={styles.title} onPress={() => this.props.navigator.pop()}>{'< Back to the form'}</Text>
-                <View style={styles.container}>
-                    <Text>{summary}</Text>
-                    <LegListView
-                        dataSource={legs}
-                        renderRow={leg => <View>
+            contents = <View style={styles.container}>
+                <Text>{summary}</Text>
+                <LegListView
+                    dataSource={legs}
+                    renderRow={leg => <View>
                             <Text>From: {leg.start_address}</Text>
                             {leg.departure_time ? <Text>Depart at {leg.departure_time.text}</Text> : null}
                             <Text>To: {leg.end_address}</Text>
@@ -38,15 +37,18 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
                                 renderRow={step => this.renderStep(step)}
                             />
                         </View>}
-                    />
-                </View>
+                />
             </View>;
         } else {
-            return <View>
+            contents = <View>
                 <Progress />
                 <DirectionsAPI {...this.props} onSuccess={route => this.onFetchRoute(route)} onError={reason => alert(reason)} />
             </View>;
         }
+        return <View style={styles.root}>
+            <Text style={styles.title} onPress={() => this.props.navigator.pop()}>{'< Back to the form'}</Text>
+            {contents}
+        </View>;
     }
 
     private onFetchRoute(route: DirectionsAPI.Route): void {
@@ -71,6 +73,7 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
 namespace Direction {
     export interface Props extends DirectionsAPI.Params {
         navigator: Navigator.NavigatorElement;
+        serverURL: string;
     }
     export interface State {
         route?: DirectionsAPI.Route;

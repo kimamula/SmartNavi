@@ -21,7 +21,7 @@ class DatePicker extends React.Component<DatePickerIOSProperties, void> {
                 </Text>
             );
         }
-        return <View style={styles.row}>{texts}</View>;
+        return <View style={this.props.style}><View style={styles.row}>{texts}</View></View>;
     }
 
     private showDatePicker(): void {
@@ -46,7 +46,7 @@ class DatePicker extends React.Component<DatePickerIOSProperties, void> {
     private showTimePicker(): void {
         TimePickerAndroid.open({
             hour: this.props.date.getHours(),
-            minute: this.props.minimumDate.getMinutes()
+            minute: this.props.date.getMinutes()
         })
             .then(({action, hour, minute}) => {
                 if (!this.props.onDateChange) {

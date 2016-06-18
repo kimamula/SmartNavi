@@ -2,12 +2,10 @@ import * as React from 'react';
 import Direction from '../model/Direction';
 import Utils from '../Utils';
 
-const serverURL = 'http://localhost:8000';
-
 class DirectionsAPI extends React.Component<DirectionsAPI.Props, void> {
     render(): JSX.Element {
         const { from, to, when, time } = this.props;
-        fetch(`${serverURL}/api/directions${Utils.toQueryString({
+        fetch(`${this.props.serverURL}/api/directions${Utils.toQueryString({
             from,
             to,
             when,
@@ -30,6 +28,7 @@ namespace DirectionsAPI {
     export interface Props extends Params {
         onSuccess(route: Route): void;
         onError(reason: any): void;
+        serverURL: string;
     }
     export interface Route {
         summary: string;

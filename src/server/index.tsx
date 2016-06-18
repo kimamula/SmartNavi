@@ -11,6 +11,37 @@ import 'isomorphic-fetch';
 
 const app = express();
 
+const supportedLanguages = [
+    'en',
+    'ar', 'kn',
+    'bg', 'ko',
+    'bn', 'lt',
+    'ca', 'lv',
+    'cs', 'ml',
+    'da', 'mr',
+    'de', 'nl',
+    'el', 'no',
+    'pl',
+    'en-AU', 'pt',
+    'en-GB', 'pt-BR',
+    'es', 'pt-PT',
+    'eu', 'ro',
+    'eu', 'ru',
+    'fa', 'sk',
+    'fi', 'sl',
+    'fil', 'sr',
+    'fr', 'sv',
+    'gl', 'ta',
+    'gu', 'te',
+    'hi', 'th',
+    'hr', 'tl',
+    'hu', 'tr',
+    'id', 'uk',
+    'it', 'vi',
+    'iw', 'zh-CN',
+    'ja', 'zh-TW'
+];
+
 app.use(express.static('public'));
 
 app.get('/api/directions', (req, res) =>
@@ -20,7 +51,7 @@ app.get('/api/directions', (req, res) =>
             destination: req.query.to,
             mode: 'transit',
             [req.query.when === Direction.When.Arrive ? 'arrival_time' : 'departure_time']: Math.floor(req.query.time / 1000),
-            language: 'ja'
+            language: req.acceptsLanguages(supportedLanguages) || 'en'
         })}`
     )
         .then(response => response.json()
@@ -38,7 +69,7 @@ app.use((req, res) => {
         response = render(<SmartNavi router={Object.assign({_notFound: () => {
             status = 404;
             return <NotFound />;
-        }}, router)} initialPathQuery={pathQuery} />, pathQuery);
+        }}, router())} initialPathQuery={pathQuery} />, pathQuery);
     res.status(status).send(response);
 });
 
