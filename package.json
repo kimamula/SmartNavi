@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "rnpm link",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "start:web": "DEBUG=express:* node ./src/server/www",
     "build": "tsc && node replace.js && webpack"
@@ -19,7 +20,8 @@
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-native": "^0.26.3",
-    "react-native-push-notification": "^1.0.6",
+    "react-native-fcm": "^1.0.9",
+    "rnpm": "^1.9.0",
     "typescript": "^1.8.10",
     "webpack": "^1.13.1"
   }

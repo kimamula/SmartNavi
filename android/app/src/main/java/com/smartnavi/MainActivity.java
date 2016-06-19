@@ -6,6 +6,7 @@ import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
+import android.content.Intent;
 
 public class MainActivity extends ReactActivity {
 
@@ -34,7 +35,12 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage()
+            new MainReactPackage(), new FIRMessagingPackage(getIntent())
         );
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent){
+        setIntent(intent);
     }
 }

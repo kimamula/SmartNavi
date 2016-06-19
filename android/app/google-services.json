@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1044404362912",
+    "firebase_url": "https://smart-navi.firebaseio.com",
+    "project_id": "smart-navi",
+    "storage_bucket": "smart-navi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044404362912:android:93b58de6a60f142a",
+        "android_client_info": {
+          "package_name": "com.smartnavi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044404362912-k65t797q25dcdsl1r8upugeimtt72ilk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwQIF8mXkh4BS0AQh7twE75duNZ2wiCGo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

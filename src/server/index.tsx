@@ -108,6 +108,17 @@ function render(element: React.ReactElement<any>, pathQuery: Navigator.PathQuery
                      data-initial-path-query={JSON.stringify(pathQuery || {})}
                      dangerouslySetInnerHTML={{__html: renderToString(element)}}
                 ></div>
+                <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+                <script>{`
+                    // Initialize Firebase
+                    var config = {
+                        apiKey: "AIzaSyCs1twyuTWO8ZF2LqR63yYOJCd-22YK2cs",
+                        authDomain: "smart-navi.firebaseapp.com",
+                        databaseURL: "https://smart-navi.firebaseio.com",
+                        storageBucket: "smart-navi.appspot.com",
+                    };
+                    firebase.initializeApp(config);
+                `}</script>
                 <script type='text/javascript' src="js/index.js"></script>
             </body>
         </html>
