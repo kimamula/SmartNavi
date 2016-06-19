@@ -1,6 +1,6 @@
 import { AppRegistry } from 'react-native'
 import * as React from 'react';
-import SmartNavi from './src/SmartNavi'
+import SmartNavi from './src/components/SmartNavi'
 import router from './src/router';
 
 class SmartNaviNative extends React.Component {

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Direction from '../model/Direction';
-import Utils from '../Utils';
+import Direction from '../../model/Direction';
+import Utils from '../../Utils';
 
 class DirectionsAPI extends React.Component<DirectionsAPI.Props, void> {
     render(): JSX.Element {

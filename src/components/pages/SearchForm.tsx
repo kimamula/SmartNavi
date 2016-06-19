@@ -1,12 +1,12 @@
 import * as React from 'react';
-import StyleSheet from './basics/StyleSheet';
-import Text from './basics/Text';
-import TextInput from './basics/TextInput';
-import View from './basics/View';
-import Picker from './basics/Picker';
-import DatePicker from './basics/DatePicker';
-import Navigator from './basics/Navigator';
-import Direction from '../model/Direction';
+import StyleSheet from '../basics/StyleSheet';
+import Text from '../basics/Text';
+import TextInput from '../basics/TextInput';
+import View from '../basics/View';
+import Picker from '../basics/Picker';
+import DatePicker from '../basics/DatePicker';
+import Navigator from '../basics/Navigator';
+import Direction from '../../model/Direction';
 
 class SearchForm extends React.Component<SearchForm.Props, SearchForm.State> {
     constructor(props: SearchForm.Props) {

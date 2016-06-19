@@ -1,11 +1,11 @@
 import * as React from 'react';
-import DirectionsAPI from './DirectionsAPI';
-import Progress from './basics/Progress';
-import View from './basics/View';
-import Text from './basics/Text';
-import ListView from './basics/ListView';
-import StyleSheet from './basics/StyleSheet';
-import Navigator from './basics/Navigator';
+import DirectionsAPI from '../remotes/DirectionsAPI';
+import Progress from '../basics/Progress';
+import View from '../basics/View';
+import Text from '../basics/Text';
+import ListView from '../basics/ListView';
+import StyleSheet from '../basics/StyleSheet';
+import Navigator from '../basics/Navigator';
 
 type LegListView = new () => ListView<DirectionsAPI.Leg>;
 type StepListView = new () => ListView<DirectionsAPI.Step>;
@@ -27,7 +27,7 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
                     dataSource={legs}
                     renderRow={leg => <View>
                             <Text>From: {leg.start_address}</Text>
-                            {leg.departure_time ? <Text>Depart at {leg.departure_time.text}</Text> : null}
+                            {leg.departure_time ? <Text style={styles.button} onPress={() => this.onPressDepartureTime(leg.departure_time.value)}>Depart at {leg.departure_time.text} (tap to notify)</Text> : null}
                             <Text>To: {leg.end_address}</Text>
                             {leg.arrival_time ? <Text>Arrive at {leg.arrival_time.text}</Text> : null}
                             <Text>Distance: {leg.distance.text}</Text>
@@ -68,6 +68,10 @@ class Direction extends React.Component<Direction.Props, Direction.State> {
             /> : null}
         </View>
     }
+
+    private onPressDepartureTime(time: number): void {
+
+    }
 }
 
 namespace Direction {
@@ -92,6 +96,11 @@ const styles = StyleSheet.create({
     },
     container: {
         backgroundColor: '#F5FCFF'
+    },
+    button: {
+        fontSize: 20,
+        color: '#FFFFFF',
+        backgroundColor: '#60b044'
     }
 });
 

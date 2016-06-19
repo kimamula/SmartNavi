@@ -1,9 +1,9 @@
 import * as express from 'express';
-import SmartNavi from '../SmartNavi'
+import SmartNavi from '../components/SmartNavi'
 import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import * as React from 'react';
 import Navigator from '../components/basics/Navigator';
-import NotFound from '../components/NotFound';
+import NotFound from '../components/pages/NotFound';
 import Direction from '../model/Direction';
 import Utils from '../Utils';
 import router from '../router';

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Text from './basics/Text';
-import View from './basics/View';
-import StyleSheet from './basics/StyleSheet';
+import Text from '../basics/Text';
+import View from '../basics/View';
+import StyleSheet from '../basics/StyleSheet';
 
 class NotFound extends React.Component<void, void> {
     render(): JSX.Element {

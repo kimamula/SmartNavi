@@ -1,6 +1,6 @@
 import Navigator from './components/basics/Navigator';
-import Direction from './components/Direction';
-import SearchForm from './components/SearchForm';
+import Direction from './components/pages/Direction';
+import SearchForm from './components/pages/SearchForm';
 import DirectionModel from './model/Direction';
 import * as React from 'react';
 
